@@ -1,257 +1,268 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Akshay's Portfolio</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>akshai</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&display=swap');
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    body {
+      margin: 0;
+      background: #65b86a; /* retro green */
+      font-family: 'IBM Plex Mono', monospace;
+    }
 
-        body {
-            font-family: 'Orbitron', sans-serif;
-            background: #161414;
-            color: red;
-            overflow-x: hidden;
-        }
+    .window {
+      width: 80%;
+      margin: 5rem auto;
+      background: #f9f6ef;
+      border: 3px solid #000;
+      border-radius: 8px;
+      box-shadow: 6px 6px 0 #000;
+      display: flex;
+      min-height: 80vh;
+    }
 
-        header {
-            position: fixed;
-            width: 100%;
-            padding: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-        }
+    /* Sidebar */
+    .sidebar {
+      width: 250px;
+      background: #f4f1e9;
+      border-right: 2px solid #000;
+      padding: 1rem;
+    }
 
-        nav {
-            display: flex;
-            width: 100%;
-        }
+    .sidebar h3 {
+      margin: 0 0 1rem;
+      font-weight: bold;
+      font-size: 14px;
+    }
 
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            width: 100%;
-        }
+    select {
+      width: 100%;
+      padding: 6px;
+      border: 2px solid #000;
+      border-radius: 4px;
+      background: #fff;
+      font-family: inherit;
+    }
 
-        nav ul li a {
-            color: red;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
+    .projects {
+      margin-top: 1rem;
+      padding: 0;
+    }
 
-        nav ul li a:hover,
-        nav ul li a.active {
-            color: white;
-        }
+    .projects li {
+      list-style: none;
+      padding: 5px 0;
+      cursor: pointer;
+      border-bottom: 1px dotted #000;
+    }
 
-        .hero {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 20px;
-        }
+    .projects li:hover {
+      background: #e8e3d8;
+    }
 
-        /* Profile image styling */
-        .profile-img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;   /* makes it a circle */
-            object-fit: cover;
-            margin-bottom: 20px;
-            border: 3px solid red;
-            box-shadow: 0 0 15px red;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
+    /* Main Content */
+    .content {
+      flex: 1;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+    }
 
-        .profile-img:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 25px red;
-        }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #000;
+      padding-bottom: 0.5rem;
+    }
 
-        .hero h2 {
-            font-size: 2.5rem;
-        }
+    .header h2 {
+      margin: 0;
+      cursor: pointer;
+      font-size: 18px;
+    }
 
-        .hero span {
-            color: white;
-        }
+    .links a {
+      margin-left: 1rem;
+      text-decoration: none;
+      color: #000;
+      font-weight: bold;
+      border-bottom: 1px dashed #000;
+    }
 
-        .hero p {
-            margin: 20px 0;
-            font-size: 1.2rem;
-        }
+    .links a:hover {
+      background: #000;
+      color: #fff;
+    }
 
-        .hero button {
-            padding: 10px 20px;
-            border: none;
-            background: red;
-            color: black;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: transform 0.3s;
-            border-radius: 10px;
-        }
+    .details {
+      flex: 1;
+      margin-top: 1rem;
+      padding: 1rem;
+      border: 2px solid #000;
+      background: #fff;
+      overflow-y: auto;
+    }
 
-        .hero button:hover {
-            transform: scale(1.1);
-        }
+    .profile {
+      display: none;
+    }
 
-        section {
-            padding: 100px 50px;
-        }
+    .project-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
 
-        .projects {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
+    .project-header a img {
+      width: 20px;
+      height: 20px;
+    }
 
-        .project-card {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 20px;
-            border-radius: 10px;
-            transition: transform 0.3s;
-            border: 1px solid red;
-        }
+    .tech-stack {
+      margin-top: 0.5rem;
+      font-size: 14px;
+    }
 
-        .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 0 20px red;
-        }
-
-        .about-me {
-            margin-top: 20px;
-            font-size: 1.2rem;
-        }
-
-        section h2 {
-            color: red;
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        section ul {
-            list-style: none;
-            display: flex;
-            justify-content: space-around;
-            margin-top: 20px;
-            font-size: 1.2rem;
-        }
-
-        a {
-            color: red;
-            text-decoration: none;
-        }
-
-        a:hover {
-            color: white;
-        }
-
-        footer {
-            text-align: center;
-            padding: 20px;
-            background: #2a2828;
-            color: red;
-        }
-    </style>
+    .tech-stack span {
+      background: #e8e3d8;
+      border: 1px solid #000;
+      padding: 2px 6px;
+      margin-right: 5px;
+      border-radius: 4px;
+      display: inline-block;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="#home" class="active">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
+  <div class="window">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <h3>Stacks</h3>
+      <select id="stackSelect">
+        <option value="">-- Select Stack --</option>
+        <option value="flutter">Flutter</option>
+        <option value="solana">Solana</option>
+        <option value="react">React</option>
+        <option value="java">Java</option>
+      </select>
+      <ul class="projects" id="projectList"></ul>
+    </div>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <img src="https://raw.githubusercontent.com/antony-akshay/solana/main/token/json-data/hue.png" alt="Profile Image" class="profile-img">
-        <h2>Hello, I'm <span>Akshay Antony</span></h2>
-        <p>Solana Developer | App Developer</p>
-        <button onclick="scrollToSection('projects')">View Projects</button>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="about">
-        <h2>About Me</h2>
-        <p class="about-me">
-            I’m Akshay Antony, a Computer Science enthusiast and developer passionate about building decentralized applications and modern mobile apps. 
-            
-            <br><br> Currently working at <b>Sqaris Technologies</b> as a Flutter Developer, I also work on Solana-based projects like <b>EventsDotFun</b> and <b>Solana Lottery</b>.
-
-            <br><br> My experience spans across app development, blockchain, and Web3 technologies, and I’m constantly exploring ways to build impactful, user-friendly, and innovative solutions.
-        </p>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="projects">
-        <h2>Projects</h2>
-        <div class="project-card">
-            <p>Zarka-Tailor App</p>
+    <!-- Main Content -->
+    <div class="content">
+      <div class="header">
+        <h2 id="name">akshay antony</h2>
+        <div class="links">
+          <a href="mailto:developer.hornbill@gmail.com">Email</a>
+          <a href="https://twitter.com/_akshaiii" target="_blank">Twitter</a>
+          <a href="https://github.com/antony-akshay" target="_blank">Github</a>
         </div>
-        <div class="project-card">
-            <p>EventsDotFun (Solana)</p>
-        </div>
-        <div class="project-card">
-            <p>Solana Lottery</p>
-        </div>
-    </section>
+      </div>
+      <div class="details" id="details">
+        <p>Select a stack to view projects or click on my name for profile details.</p>
+      </div>
+      
+    </div>
+  </div>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <h2>Connect with me</h2>
-        <ul>
-            <li><a href="mailto:developer.hornbill@gmail.com">Email</a></li>
-            <li><a href="https://www.linkedin.com/in/akshay-antony-597249275?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app">LinkedIn</a></li>
-            <li><a href="https://github.com/antony-akshay">GitHub</a></li>
-        </ul>
-    </section>
-
-    <footer>
-        <p>© 2025 Akshay's Portfolio | All Rights Reserved</p>
-    </footer>
-
-    <script>
-        function scrollToSection(id) {
-            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+  <script>
+    const projects = {
+      flutter: [
+        {
+          name: "zarka-app",
+          description: "Zarka App is like Zomato for tailoring — a platform where users can connect with tailors, place stitching orders, and get clothes delivered. The app bridges the gap between traditional tailoring services and digital convenience, offering a seamless user experience for both customers and service providers.",
+          repo: "https://github.com/antony-akshay/zarka-app",
+          tech: ["Flutter", "Node.js"]
+        },
+        {
+          name: "wei",
+          description: "Wei is an event management app similar to Luma and River. It helps users create, manage, and join events with features like ticketing, RSVP tracking, and attendee engagement. Wei is designed for both casual meetups and large-scale events, offering organizers a smooth way to manage communities.",
+          repo: "https://github.com/antony-akshay/wei",
+          tech: ["Flutter"]
         }
+      ],
+      solana: [
+        {
+          name: "eventsdotfun",
+          description: "eventsdotfun is a Proof of Attendance Protocol (POAP) application that allows event organizers to issue digital badges for attendees. It leverages blockchain to ensure authenticity, enabling participants to collect verifiable proof of their presence at events.",
+          repo: "https://github.com/antony-akshay/zyra",
+          tech: ["Solana", "React", "Vite", "Anchor"]
+        },
+        {
+          name: "depin-uptime",
+          description: "DePIN Uptime is a Solana-based monitoring tool for tracking the health of websites and online services. It continuously checks uptime status and logs data on-chain, ensuring transparency and reliability through decentralized infrastructure.",
+          repo: "https://github.com/antony-akshay/depin-uptime",
+          tech: ["Clerk", "React", "Prisma", "Solana", "Anchor"]
+        }
+      ],
+      react: [
+        {
+          name: "portfolio-site",
+          description: "A personal portfolio website showcasing my projects and skills, built with React.",
+          repo: "https://github.com/antony-akshay/portfolio",
+          tech: ["basic-web"]
+        },
+        {
+          name: "dashboard-ui",
+          description: "A clean and responsive dashboard UI built with React, focusing on reusability and minimal design.",
+          repo: "https://github.com/antony-akshay/sqaris",
+          tech: ["React"]
+        }
+      ],
+      java: [
+        {
+          name: "smart-glass-controller",
+          description: "SmartGlass Controller is a Java-based mobile application designed to connect with custom smart spectacles built using an Arduino Nano and an HC-05 Bluetooth module. The app establishes a Bluetooth connection to transmit real-time data—such as the current time—and attempts to send caller notifications to an OLED display mounted on the spectacles. Developed rapidly during a mini-project sprint, this application highlights how Java can be used on Android to bridge mobile software with wearable hardware. While the caller ID feature is still under development due to encryption restrictions on modern Android devices, the core time-sync module is fully functional, offering a solid foundation for future smart wearable integrations.",
+          repo: "https://github.com/antony-akshay/smart-glass-controller",
+          tech: ["Java", "Bluetooth APIs"]
+        }
+      ]
+    };
 
-        window.addEventListener('scroll', () => {
-            document.querySelectorAll('section').forEach(sec => {
-                let top = window.scrollY;
-                let offset = sec.offsetTop - 150;
-                let height = sec.offsetHeight;
-                let id = sec.getAttribute('id');
+    const stackSelect = document.getElementById("stackSelect");
+    const projectList = document.getElementById("projectList");
+    const details = document.getElementById("details");
+    const name = document.getElementById("name");
+    const profile = document.getElementById("profile");
 
-                if (top >= offset && top < offset + height) {
-                    document.querySelectorAll('nav ul li a').forEach(link => {
-                        link.classList.remove('active');
-                        if (link.getAttribute('href') === `#${id}`) {
-                            link.classList.add('active');
-                        }
-                    });
-                }
-            });
+    stackSelect.addEventListener("change", () => {
+      const stack = stackSelect.value;
+      projectList.innerHTML = "";
+      if (projects[stack]) {
+        projects[stack].forEach(p => {
+          const li = document.createElement("li");
+          li.textContent = p.name;
+          li.onclick = () => {
+            details.innerHTML = `
+              <div class="project-header">
+                <h3>${p.name}</h3>
+                <a href="${p.repo}" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" alt="GitHub"></a>
+              </div>
+              <p>${p.description}</p>
+              <div class="tech-stack"><strong>Tech Used:</strong> ${p.tech.map(t => `<span>${t}</span>`).join("")}</div>
+            `;
+            profile.style.display = "none";
+          };
+          projectList.appendChild(li);
         });
-    </script>
+      }
+    });
+
+    name.addEventListener("click", () => {
+  details.innerHTML = `
+    <img src="https://raw.githubusercontent.com/antony-akshay/solana/main/token/json-data/hue.png" alt="img" width=220>
+    <h3>About Me</h3>
+    <p>Hello I’m Akshay, a curious developer who loves turning ideas into functional apps. 
+    I specialize in Flutter, enjoy learning about Web3, and often experiment with projects 
+    that bring together creativity and technology. When I’m not coding, you’ll find me 
+    exploring new tools, brainstorming fresh ideas, or attending tech meetups.</p>
+    
+  `;
+});
+  </script>
 </body>
 </html>
-
