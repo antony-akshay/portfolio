@@ -7,6 +7,8 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&display=swap');
 
+    
+
     body {
       margin: 0;
       background: #65b86a; /* retro green */
@@ -99,13 +101,14 @@
     }
 
     .details {
-      flex: 1;
-      margin-top: 1rem;
-      padding: 1rem;
-      border: 2px solid #000;
-      background: #fff;
-      overflow-y: auto;
-    }
+  flex: 1;
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 2px solid #000;
+  background: #fff;
+  overflow-y: auto;
+  max-height: calc(80vh - 120px); /* 👈 adjust as needed */
+}
 
     .profile {
       display: none;
@@ -148,6 +151,7 @@
         <option value="solana">Solana</option>
         <option value="react">React</option>
         <option value="java">Java</option>
+        <option value="hackathons">Hackathons</option>
       </select>
       <ul class="projects" id="projectList"></ul>
     </div>
@@ -190,13 +194,18 @@
           name: "eventsdotfun",
           description: "eventsdotfun is a Proof of Attendance Protocol (POAP) application that allows event organizers to issue digital badges for attendees. It leverages blockchain to ensure authenticity, enabling participants to collect verifiable proof of their presence at events.",
           repo: "https://github.com/antony-akshay/zyra",
-          tech: ["Solana", "React", "Vite", "Anchor"]
+          tech: ["Solana", "React", "Vite", "Anchor","next.js","cat.moe","extendsClassJson"]
         },
         {
           name: "depin-uptime",
           description: "DePIN Uptime is a Solana-based monitoring tool for tracking the health of websites and online services. It continuously checks uptime status and logs data on-chain, ensuring transparency and reliability through decentralized infrastructure.",
           repo: "https://github.com/antony-akshay/depin-uptime",
-          tech: ["Clerk", "React", "Prisma", "Solana", "Anchor"]
+          tech: ["Clerk", "React", "Prisma", "Solana", "Anchor","psql"]
+        },
+        {
+          name: "solana-programs",
+          description: "a collection of Solana programs (smart contracts) that demonstrate various functionalities and use cases on the Solana blockchain. These programs serve as examples and building blocks for developers looking to create their own decentralized applications.",
+          repo: "https://github.com/antony-akshay/solana"
         }
       ],
       react: [
@@ -207,9 +216,9 @@
           tech: ["basic-web"]
         },
         {
-          name: "dashboard-ui",
+          name: "sqaris-technologies-website",
           description: "A clean and responsive dashboard UI built with React, focusing on reusability and minimal design.",
-          repo: "https://github.com/antony-akshay/sqaris",
+          repo: "https://sqaris-alpha.vercel.app/",
           tech: ["React"]
         }
       ],
@@ -220,7 +229,15 @@
           repo: "https://github.com/antony-akshay/smart-glass-controller",
           tech: ["Java", "Bluetooth APIs"]
         }
-      ]
+      ],
+      hackathons: [
+        {
+          name: "Rotato (ongoing...)",
+          description: "Built a Rosca smart contract on Ethereum during EthGlobal hackathon. The project focused on creating a decentralized rotating savings and credit association (ROSCA) to facilitate community-based savings and lending.",
+          repo: "https://github.com/antony-akshay/rotato/",
+          tech: ["Ethereum", "Solidity", "PythNetwork", "ENS", "Kadena"]
+        }
+      ],
     };
 
     const stackSelect = document.getElementById("stackSelect");
