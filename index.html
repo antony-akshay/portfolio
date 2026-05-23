@@ -1,287 +1,580 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Akshay Antony Portfolio</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Akshay Antony</title>
+
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;600&display=swap');
 
-    
-
-    body {
-      margin: 0;
-      background: #65b86a; /* retro green */
-      font-family: 'IBM Plex Mono', monospace;
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
     }
 
-    .window {
-      width: 80%;
-      margin: 5rem auto;
-      background: #f9f6ef;
-      border: 3px solid #000;
-      border-radius: 8px;
-      box-shadow: 6px 6px 0 #000;
-      display: flex;
-      min-height: 80vh;
+    html{
+      scroll-behavior:smooth;
     }
 
-    /* Sidebar */
-    .sidebar {
-      width: 250px;
-      background: #f4f1e9;
-      border-right: 2px solid #000;
-      padding: 1rem;
+    body{
+      background:#050505;
+      color:#d9d9d9;
+      font-family:'IBM Plex Mono', monospace;
+      min-height:100vh;
+      display:flex;
+      justify-content:center;
+      padding:60px 20px;
+      overflow-x:hidden;
+      position:relative;
     }
 
-    .sidebar h3 {
-      margin: 0 0 1rem;
-      font-weight: bold;
-      font-size: 14px;
+    /* rainbow glow */
+
+    .rainbow{
+      position:fixed;
+      width:300px;
+      height:300px;
+      border-radius:50%;
+      pointer-events:none;
+      background:conic-gradient(
+        red,
+        orange,
+        yellow,
+        lime,
+        cyan,
+        blue,
+        violet,
+        red
+      );
+      filter:blur(90px);
+      opacity:.16;
+      z-index:-2;
+      transform:translate(-50%, -50%);
+      animation:spin 8s linear infinite;
     }
 
-    select {
-      width: 100%;
-      padding: 6px;
-      border: 2px solid #000;
-      border-radius: 4px;
-      background: #fff;
-      font-family: inherit;
+    @keyframes spin{
+      100%{
+        transform:translate(-50%, -50%) rotate(360deg);
+      }
     }
 
-    .projects {
-      margin-top: 1rem;
-      padding: 0;
+    /* grid background */
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size:40px 40px;
+      z-index:-3;
     }
 
-    .projects li {
-      list-style: none;
-      padding: 5px 0;
-      cursor: pointer;
-      border-bottom: 1px dotted #000;
+    .container{
+      width:100%;
+      max-width:760px;
+      position:relative;
+      z-index:10;
     }
 
-    .projects li:hover {
-      background: #e8e3d8;
+    /* top */
+
+    .top{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      margin-bottom:20px;
     }
 
-    /* Main Content */
-    .content {
-      flex: 1;
-      padding: 1rem;
-      display: flex;
-      flex-direction: column;
+    .avatar{
+      width:60px;
+      height:60px;
+      border-radius:50%;
+      object-fit:cover;
+      border:2px solid #1a1a1a;
     }
 
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 2px solid #000;
-      padding-bottom: 0.5rem;
+    h1{
+      font-size:22px;
+      font-weight:600;
+      color:white;
     }
 
-    .header h2 {
-      margin: 0;
-      cursor: pointer;
-      font-size: 18px;
+    /* bio */
+
+    .bio{
+      line-height:1.8;
+      font-size:14px;
+      color:#bdbdbd;
+      margin-bottom:24px;
     }
 
-    .links a {
-      margin-left: 1rem;
-      text-decoration: none;
-      color: #000;
-      font-weight: bold;
-      border-bottom: 1px dashed #000;
+    .quote{
+      border-left:1px solid #2a2a2a;
+      padding-left:16px;
+      margin-bottom:35px;
+      color:#d6d6d6;
+      line-height:1.7;
     }
 
-    .links a:hover {
-      background: #000;
-      color: #fff;
+    /* section */
+
+    .section-title{
+      color:#7d7d7d;
+      font-size:12px;
+      margin-bottom:22px;
+      text-transform:uppercase;
+      letter-spacing:2px;
     }
 
-    .details {
-  flex: 1;
-  margin-top: 1rem;
-  padding: 1rem;
-  border: 2px solid #000;
-  background: #fff;
-  overflow-y: auto;
-  max-height: calc(80vh - 120px); /* 👈 adjust as needed */
-}
+    /* projects */
 
-    .profile {
-      display: none;
+    .post{
+      margin-bottom:22px;
     }
 
-    .project-header {
-      display: flex;
-      align-items: center;
-      gap: 10px;
+    .date{
+      font-size:12px;
+      color:#666;
+      margin-bottom:6px;
     }
 
-    .project-header a img {
-      width: 20px;
-      height: 20px;
+    .post-title{
+      font-size:18px;
+      color:white;
+      text-decoration:none;
+      font-weight:600;
+      transition:.2s ease;
     }
 
-    .tech-stack {
-      margin-top: 0.5rem;
-      font-size: 14px;
+    .post-title:hover{
+      opacity:.8;
     }
 
-    .tech-stack span {
-      background: #e8e3d8;
-      border: 1px solid #000;
-      padding: 2px 6px;
-      margin-right: 5px;
-      border-radius: 4px;
-      display: inline-block;
+    .desc{
+      margin-top:8px;
+      color:#989898;
+      font-size:14px;
+      line-height:1.7;
     }
+
+    .project-footer{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:20px;
+      margin-top:12px;
+      flex-wrap:wrap;
+    }
+
+    .read{
+      color:#bdbdbd;
+      text-decoration:none;
+      font-size:13px;
+      transition:.2s ease;
+    }
+
+    .read:hover{
+      color:white;
+    }
+
+    /* stacks */
+
+    .stack{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+
+    .stack span{
+      border:1px solid #222;
+      background:#0c0c0c;
+      color:#9d9d9d;
+      padding:4px 10px;
+      border-radius:999px;
+      font-size:11px;
+      transition:.2s ease;
+    }
+
+    .stack span:hover{
+      border-color:#666;
+      color:white;
+      transform:translateY(-2px);
+    }
+
+    /* more button */
+
+    .more-btn{
+      margin-top:12px;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      cursor:pointer;
+      color:#8d8d8d;
+      font-size:14px;
+      transition:.2s ease;
+    }
+
+    .more-btn:hover{
+      color:white;
+    }
+
+    .hidden-projects{
+      display:none;
+      margin-top:22px;
+    }
+
+    /* footer */
+
+    .footer{
+      margin-top:50px;
+      display:flex;
+      gap:22px;
+      flex-wrap:wrap;
+    }
+
+    .footer a{
+      color:#bdbdbd;
+      text-decoration:none;
+      font-size:14px;
+      transition:.2s ease;
+    }
+
+    .footer a:hover{
+      color:white;
+    }
+
+    .email{
+      margin-top:20px;
+      color:#666;
+      font-size:13px;
+    }
+
+    /* mobile */
+
+    @media(max-width:600px){
+
+      body{
+        padding:40px 18px;
+      }
+
+      h1{
+        font-size:18px;
+      }
+
+      .post-title{
+        font-size:16px;
+      }
+
+      .bio,
+      .desc{
+        font-size:13px;
+      }
+
+      .project-footer{
+        align-items:flex-start;
+        flex-direction:column;
+      }
+
+    }
+
   </style>
 </head>
+
 <body>
-  <div class="window">
-    <!-- Sidebar -->
-    <div class="sidebar">
-      <h3>Stacks</h3>
-      <select id="stackSelect">
-        <option value="">-- Select Stack --</option>
-        <option value="flutter">Flutter</option>
-        <option value="solana">Solana</option>
-        <option value="react">React</option>
-        <option value="java">Java</option>
-        <option value="hackathons">Hackathons</option>
-      </select>
-      <ul class="projects" id="projectList"></ul>
+
+  <!-- rainbow -->
+
+  <div class="rainbow" id="rainbow"></div>
+
+  <div class="container">
+
+    <!-- top -->
+
+    <div class="top">
+
+      <img 
+        src="https://avatars.githubusercontent.com/u/138225095?v=4"
+        class="avatar"
+      />
+
+      <div>
+        <h1>Akshay Antony</h1>
+      </div>
+
     </div>
 
-    <!-- Main Content -->
-    <div class="content">
-      <div class="header">
-        <h2 id="name">akshay antony</h2>
-        <div class="links">
-          <a href="mailto:developer.hornbill@gmail.com">Email</a>
-          <a href="https://twitter.com/_akshaiii" target="_blank">Twitter</a>
-          <a href="https://github.com/antony-akshay" target="_blank">Github</a>
-        </div>
-      </div>
-      <div class="details" id="details">
-        <p>Select a stack to view projects or click on my name for profile details.</p>
-      </div>
-      
+    <!-- bio -->
+
+    <div class="bio">
+      Fullstack developer and builder exploring Web3, backend systems,
+      developer tooling, and minimal product design.
     </div>
+
+    <div class="quote">
+      Currently building event platforms, decentralized infrastructure,
+      and experimenting with AI + developer workflows.
+    </div>
+
+    <!-- projects -->
+
+    <div class="section-title">Projects</div>
+
+    <!-- eventsdotfun -->
+
+    <div class="post">
+
+      <div class="date">2026</div>
+
+      <a href="https://github.com/antony-akshay/eventsdotfun" class="post-title">
+        eventsdotfun — Proof of Attendance Protocol
+      </a>
+
+      <div class="desc">
+        A decentralized event platform where organizers can issue
+        blockchain-verified attendance badges using Solana.
+      </div>
+
+      <div class="project-footer">
+
+        <a href="https://github.com/antony-akshay/eventsdotfun" class="read">
+          View project ↗
+        </a>
+
+        <div class="stack">
+          <span>Solana</span>
+          <span>Anchor</span>
+          <span>React</span>
+          <span>Next.js</span>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- zarka -->
+
+    <div class="post">
+
+      <div class="date">2026</div>
+
+      <a href="https://github.com/antony-akshay/zarka-app" class="post-title">
+        Zarka — Tailoring Delivery Application
+      </a>
+
+      <div class="desc">
+        A tailoring marketplace connecting customers with tailors for
+        booking, delivery tracking, and order management.
+      </div>
+
+      <div class="project-footer">
+
+        <a href="https://github.com/antony-akshay/zarka-app" class="read">
+          View project ↗
+        </a>
+
+        <div class="stack">
+          <span>Flutter</span>
+          <span>Firebase</span>
+          <span>Node.js</span>
+        </div>
+
+      </div>
+
+    </div>
+    
+    <!-- pullpilot -->
+
+      <div class="post">
+
+        <div class="date">2025</div>
+
+        <a href="#" class="post-title">
+          PullPilot — AI Pull Request Reviewer
+        </a>
+
+        <div class="desc">
+          AI-powered GitHub PR review assistant built using modern frontend tooling.
+        </div>
+
+        <div class="project-footer">
+
+          <a href="#" class="read">
+            View project ↗
+          </a>
+
+          <div class="stack">
+            <span>Next.js</span>
+            <span>Webook</span>
+            <span>AI</span>
+            <span>Tailwind</span>
+            <span>shadcn/ui</span>
+          </div>
+
+        </div>
+
+      </div>
+
+    <!-- pingpaw -->
+
+    <div class="post">
+
+      <div class="date">2026</div>
+
+      <a href="https://github.com/antony-akshay/pingpaw" class="post-title">
+        PingPaw — DePIN Monitoring Tool
+      </a>
+
+      <div class="desc">
+        Solana-based decentralized uptime monitoring with validator reports,
+        on-chain transparency, and decentralized infrastructure tracking.
+      </div>
+
+      <div class="project-footer">
+
+        <a href="https://github.com/antony-akshay/pingpaw" class="read">
+          View project ↗
+        </a>
+
+        <div class="stack">
+          <span>Solana</span>
+          <span>Prisma</span>
+          <span>Postgres</span>
+          <span>React</span>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- more button -->
+
+    <div class="more-btn" onclick="toggleProjects()">
+      more projects +
+    </div>
+
+    <!-- hidden projects -->
+
+    <div class="hidden-projects" id="moreProjects">
+
+      <!-- hermes -->
+
+      <div class="post">
+
+        <div class="date">2025</div>
+
+        <a href="#" class="post-title">
+          Hermes — Real-time Chat Application
+        </a>
+
+        <div class="desc">
+          Full-stack chat platform using Socket.io, Zustand, and JWT authentication.
+        </div>
+
+        <div class="project-footer">
+
+          <a href="#" class="read">
+            View project ↗
+          </a>
+
+          <div class="stack">
+            <span>React</span>
+            <span>Socket.io</span>
+            <span>Zustand</span>
+            <span>JWT</span>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- rust cat -->
+
+      <div class="post">
+
+        <div class="date">2025</div>
+
+        <a href="#" class="post-title">
+          Rust Cat CLI
+        </a>
+
+        <div class="desc">
+          Enhanced Rust implementation of the Linux cat command with
+          syntax-aware formatting and colored terminal output.
+        </div>
+
+        <div class="project-footer">
+
+          <a href="#" class="read">
+            View project ↗
+          </a>
+
+          <div class="stack">
+            <span>Rust</span>
+            <span>CLI</span>
+            <span>serde</span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- footer -->
+
+    <div class="footer">
+
+      <a href="https://github.com/antony-akshay">
+        github
+      </a>
+
+      <a href="https://twitter.com/_akshaiii">
+        twitter
+      </a>
+
+      <a href="https://linkedin.com">
+        linkedin
+      </a>
+
+    </div>
+
+    <div class="email">
+      developer.hornbill@gmail.com
+    </div>
+
   </div>
 
   <script>
-    const projects = {
-      flutter: [
-        {
-          name: "zarka-app",
-          description: "Zarka App is like Zomato for tailoring — a platform where users can connect with tailors, place stitching orders, and get clothes delivered. The app bridges the gap between traditional tailoring services and digital convenience, offering a seamless user experience for both customers and service providers.",
-          repo: "https://github.com/antony-akshay/zarka-app",
-          tech: ["Flutter", "Node.js"]
-        },
-        {
-          name: "wei",
-          description: "Wei is an event management app similar to Luma and River. It helps users create, manage, and join events with features like ticketing, RSVP tracking, and attendee engagement. Wei is designed for both casual meetups and large-scale events, offering organizers a smooth way to manage communities.",
-          repo: "https://github.com/antony-akshay/wei",
-          tech: ["Flutter"]
-        }
-      ],
-      solana: [
-        {
-          name: "eventsdotfun",
-          description: "eventsdotfun is a Proof of Attendance Protocol (POAP) application that allows event organizers to issue digital badges for attendees. It leverages blockchain to ensure authenticity, enabling participants to collect verifiable proof of their presence at events.",
-          repo: "https://github.com/antony-akshay/zyra",
-          tech: ["Solana", "React", "Vite", "Anchor","next.js","cat.moe","extendsClassJson"]
-        },
-        {
-          name: "depin-uptime",
-          description: "DePIN Uptime is a Solana-based monitoring tool for tracking the health of websites and online services. It continuously checks uptime status and logs data on-chain, ensuring transparency and reliability through decentralized infrastructure.",
-          repo: "https://github.com/antony-akshay/depin-uptime",
-          tech: ["Clerk", "React", "Prisma", "Solana", "Anchor","psql"]
-        },
-        {
-          name: "solana-programs",
-          description: "a collection of Solana programs (smart contracts) that demonstrate various functionalities and use cases on the Solana blockchain. These programs serve as examples and building blocks for developers looking to create their own decentralized applications.",
-          repo: "https://github.com/antony-akshay/solana"
-        }
-      ],
-      react: [
-        {
-          name: "portfolio-site",
-          description: "A personal portfolio website showcasing my projects and skills, built with React.",
-          repo: "https://github.com/antony-akshay/portfolio",
-          tech: ["basic-web"]
-        },
-        {
-          name: "sqaris-technologies-website",
-          description: "A clean and responsive dashboard UI built with React, focusing on reusability and minimal design.",
-          repo: "https://sqaris-alpha.vercel.app/",
-          tech: ["React"]
-        }
-      ],
-      java: [
-        {
-          name: "smart-glass-controller",
-          description: "SmartGlass Controller is a Java-based mobile application designed to connect with custom smart spectacles built using an Arduino Nano and an HC-05 Bluetooth module. The app establishes a Bluetooth connection to transmit real-time data—such as the current time—and attempts to send caller notifications to an OLED display mounted on the spectacles. Developed rapidly during a mini-project sprint, this application highlights how Java can be used on Android to bridge mobile software with wearable hardware. While the caller ID feature is still under development due to encryption restrictions on modern Android devices, the core time-sync module is fully functional, offering a solid foundation for future smart wearable integrations.",
-          repo: "https://github.com/antony-akshay/smart-glass-controller",
-          tech: ["Java", "Bluetooth APIs"]
-        }
-      ],
-      hackathons: [
-        {
-          name: "Rotato (ongoing...)",
-          description: "Built a Rosca smart contract on Ethereum during EthGlobal hackathon. The project focused on creating a decentralized rotating savings and credit association (ROSCA) to facilitate community-based savings and lending.",
-          repo: "https://github.com/antony-akshay/rotato/",
-          tech: ["Ethereum", "Solidity", "PythNetwork", "ENS", "Kadena"]
-        }
-      ],
-    };
 
-    const stackSelect = document.getElementById("stackSelect");
-    const projectList = document.getElementById("projectList");
-    const details = document.getElementById("details");
-    const name = document.getElementById("name");
-    const profile = document.getElementById("profile");
+    // rainbow follow
 
-    stackSelect.addEventListener("change", () => {
-      const stack = stackSelect.value;
-      projectList.innerHTML = "";
-      if (projects[stack]) {
-        projects[stack].forEach(p => {
-          const li = document.createElement("li");
-          li.textContent = p.name;
-          li.onclick = () => {
-            details.innerHTML = `
-              <div class="project-header">
-                <h3>${p.name}</h3>
-                <a href="${p.repo}" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" alt="GitHub"></a>
-              </div>
-              <p>${p.description}</p>
-              <div class="tech-stack"><strong>Tech Used:</strong> ${p.tech.map(t => `<span>${t}</span>`).join("")}</div>
-            `;
-            profile.style.display = "none";
-          };
-          projectList.appendChild(li);
-        });
-      }
+    const rainbow = document.getElementById("rainbow");
+
+    document.addEventListener("mousemove", (e) => {
+      rainbow.style.left = e.clientX + "px";
+      rainbow.style.top = e.clientY + "px";
     });
 
-    name.addEventListener("click", () => {
-  details.innerHTML = `
-    <img src="https://raw.githubusercontent.com/antony-akshay/solana/main/token/json-data/hue.png" alt="img" width=220>
-    <h3>About Me</h3>
-    <p>Hello I’m Akshay, a curious developer who loves turning ideas into functional apps. 
-    I specialize in Flutter, enjoy learning about Web3, and often experiment with projects 
-    that bring together creativity and technology. When I’m not coding, you’ll find me 
-    exploring new tools, brainstorming fresh ideas, or attending tech meetups.</p>
-    <h3>Experience</h3>
-    <p>SQARIS Technologies  <span> - Flutter developer-</span><p> present</p></p>
-    <p>Sewcode Technologies  <span> - Flutter developer Intern-</span><p> 6 months</p></p>
-  `;
-});
+    // toggle projects
+
+    function toggleProjects(){
+
+      const section = document.getElementById("moreProjects");
+
+      if(section.style.display === "block"){
+        section.style.display = "none";
+      }else{
+        section.style.display = "block";
+      }
+
+    }
+
   </script>
+
 </body>
 </html>
